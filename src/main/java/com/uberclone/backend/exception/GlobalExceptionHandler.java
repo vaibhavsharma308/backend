@@ -32,4 +32,15 @@ public class GlobalExceptionHandler {
         errorResponse.setDetail("Error Occurred");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleIllegalArgument(
+            IllegalArgumentException ex) {
+
+        ErrorResponseDTO error = new ErrorResponseDTO();
+        error.setMessage(ex.getMessage());
+        error.setTimestamp(LocalDateTime.now());
+        error.setDetail("Bad request");
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
