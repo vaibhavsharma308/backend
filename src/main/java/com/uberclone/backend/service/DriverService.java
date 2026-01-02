@@ -88,5 +88,48 @@ public class DriverService {
 
         return response;
     }
+    public DriverProfileResponse updateAvailability(
+            Long driverId,
+            UpdateDriverAvailabilityRequest request) {
+
+        Driver driver = driverRepository.findById(driverId)
+                .orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
+
+        // Guard: profile must be complete
+        if (driver.getStatus() == DriverStatus.INCOMPLETE_PROFILE) {
+            throw new IllegalStateException("Complete profile before changing availability");
+        }
+
+        DriverStatus newStatus;
+        try {
+            newStatus = DriverStatus.valueOf(request.getStatus());
+        } catch (IllegalArgumentException ex) {
+            throw new IllegalArgumentException("Invalid status value");
+        }
+
+        // Guard: frontend cannot set BUSY
+        if (newStatus == DriverStatus.BUSY) {
+            throw new IllegalStateException("Status BUSY is system controlled");
+        }
+
+        // Only allow OFFLINE <-> AVAILABLE from frontend
+        if (!(newStatus == DriverStatus.OFFLINE || newStatus == DriverStatus.AVAILABLE)) {
+            throw new IllegalArgumentException("Invalid availability transition");
+        }
+
+        driver.setStatus(newStatus);
+        Driver saved = driverRepository.save(driver);
+
+        DriverProfileResponse response = new DriverProfileResponse();
+        response.setId(saved.getId());
+        response.setFirstname(saved.getFirstname());
+        response.setLastname(saved.getLastname());
+        response.setEmail(saved.getEmail());
+        response.setPhoneNo(saved.getPhoneNo());
+        response.setVehicleNumber(saved.getVehicleNumber());
+        response.setStatus(saved.getStatus().name());
+
+        return response;
+    }
 
 }

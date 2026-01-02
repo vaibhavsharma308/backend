@@ -31,5 +31,11 @@ public class DriverController {
             @Valid @RequestBody UpdateDriverProfileRequest request) {
         return driverService.completeProfile(driverId, request);
     }
+    @PatchMapping("/me/availability")
+    public DriverProfileResponse updateAvailability(
+            @RequestParam Long driverId,
+            @Valid @RequestBody UpdateDriverAvailabilityRequest request) {
+        return driverService.updateAvailability(driverId, request);
+    }
 
 }
