@@ -1,8 +1,11 @@
 package com.uberclone.backend.controller;
 
 
+import com.uberclone.backend.Entity.User;
 import com.uberclone.backend.dto.CreateUserRequest;
+import com.uberclone.backend.dto.UpdateUserRequest;
 import com.uberclone.backend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,11 +17,25 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping
-    public String createUser(@RequestBody CreateUserRequest request) {
+    public String createUser(@RequestBody @Valid CreateUserRequest request) {
         return userService.createUser(request);
     }
     @GetMapping("/{id}")
-    public String getUser(@PathVariable Long id) {
-        return "Getting Driver with iD "+ id ;
+    public User getUser(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
+    @PutMapping("/{id}")
+    public User updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateUserRequest request) {
+        return userService.updateUser(id, request);
+    }
+
+    @PatchMapping("/{id}")
+    public User patchUser(
+            @PathVariable Long id,
+            @RequestBody UpdateUserRequest request) {
+        return userService.updateUser(id, request);
+    }
+
 }

@@ -6,8 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class CreateUserRequest {
-
+public class UpdateUserRequest {
     @NotBlank(message = "name is required")
     String name;
 
