@@ -2,14 +2,14 @@ package com.uberclone.backend.controller;
 
 
 import com.uberclone.backend.Entity.User;
-import com.uberclone.backend.dto.CreateUserRequest;
-import com.uberclone.backend.dto.UpdateUserRequest;
+import com.uberclone.backend.dto.*;
 import com.uberclone.backend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/users")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     private final UserService userService;
 
@@ -37,5 +37,19 @@ public class UserController {
             @RequestBody UpdateUserRequest request) {
         return userService.updateUser(id, request);
     }
-
+    @PostMapping("/login")
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        return userService.login(request);
+    }
+    @GetMapping("/me")
+    public UserProfileResponse getMyProfile(
+            @RequestParam Long userId) {
+        return userService.getUserProfile(userId);
+    }
+    @PutMapping("/me")
+    public UserProfileResponse updateMyProfile(
+            @RequestParam Long userId,
+            @Valid @RequestBody UpdateUserProfileRequest request) {
+        return userService.updateUserProfile(userId, request);
+    }
 }
