@@ -2,7 +2,9 @@ package com.uberclone.backend.controller;
 
 import com.uberclone.backend.dto.*;
 import com.uberclone.backend.service.DriverService;
+import com.uberclone.backend.service.RideService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,9 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class DriverController {
 
     private final DriverService driverService;
-
-    public DriverController(DriverService driverService) {
+    private final RideService rideService;
+    public DriverController(DriverService driverService, RideService rideService) {
         this.driverService = driverService;
+        this.rideService = rideService;
     }
 
     @PostMapping("/signup")
@@ -37,5 +40,34 @@ public class DriverController {
             @Valid @RequestBody UpdateDriverAvailabilityRequest request) {
         return driverService.updateAvailability(driverId, request);
     }
+    @GetMapping("/me/assigned-ride")
+    public ResponseEntity<?> getAssignedRide(
+            @RequestParam Long driverId) {
+
+        RideResponse ride =
+                rideService.getAssignedRideForDriver(driverId);
+
+        if (ride == null) {
+            return ResponseEntity.noContent().build(); // 204
+        }
+
+        return ResponseEntity.ok(ride);
+    }
+    @PostMapping("/me/rides/{rideId}/accept")
+    public RideResponse acceptRide(
+            @PathVariable Long rideId,
+            @RequestParam Long driverId) {
+
+        return rideService.acceptRide(rideId, driverId);
+    }
+    @PostMapping("/me/rides/{rideId}/reject")
+    public ResponseEntity<Void> rejectRide(
+            @PathVariable Long rideId,
+            @RequestParam Long driverId) {
+
+        rideService.rejectRide(rideId, driverId);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

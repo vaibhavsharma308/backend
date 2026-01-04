@@ -1,7 +1,7 @@
 package com.uberclone.backend.repository;
 
-import com.uberclone.backend.Entity.Driver;
-import com.uberclone.backend.Entity.DriverStatus;
+import com.uberclone.backend.entity.Driver;
+import com.uberclone.backend.entity.DriverStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

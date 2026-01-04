@@ -1,4 +1,4 @@
-package com.uberclone.backend.enums;
+package com.uberclone.backend.entity;
 
 public enum RideStatus {
     REQUESTED,

@@ -1,6 +1,5 @@
-package com.uberclone.backend.Entity;
+package com.uberclone.backend.entity;
 
-import com.uberclone.backend.Entity.DriverStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

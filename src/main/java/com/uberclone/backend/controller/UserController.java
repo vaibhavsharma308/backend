@@ -1,7 +1,7 @@
 package com.uberclone.backend.controller;
 
 
-import com.uberclone.backend.Entity.User;
+import com.uberclone.backend.entity.User;
 import com.uberclone.backend.dto.*;
 import com.uberclone.backend.service.UserService;
 import jakarta.validation.Valid;

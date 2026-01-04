@@ -1,4 +1,4 @@
-package com.uberclone.backend.Entity;
+package com.uberclone.backend.entity;
 
 
 public enum DriverStatus {

@@ -1,10 +1,9 @@
-package com.uberclone.backend.Entity;
+package com.uberclone.backend.entity;
 
 
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NonNull;
 
 @Entity
 @Table(name = "users")

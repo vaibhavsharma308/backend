@@ -1,6 +1,6 @@
 package com.uberclone.backend.entity;
 
-import com.uberclone.backend.enums.RideStatus;
+
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -1,8 +1,8 @@
 package com.uberclone.backend.service;
 
-import com.uberclone.backend.Entity.DriverStatus;
+import com.uberclone.backend.entity.DriverStatus;
 import com.uberclone.backend.dto.*;
-import com.uberclone.backend.Entity.Driver;
+import com.uberclone.backend.entity.Driver;
 import com.uberclone.backend.exception.ResourceNotFoundException;
 import com.uberclone.backend.repository.DriverRepository;
 import org.springframework.stereotype.Service;

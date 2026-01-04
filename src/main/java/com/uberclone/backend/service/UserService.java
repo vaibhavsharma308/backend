@@ -1,6 +1,6 @@
 package com.uberclone.backend.service;
 
-import com.uberclone.backend.Entity.User;
+import com.uberclone.backend.entity.User;
 import com.uberclone.backend.dto.*;
 import com.uberclone.backend.exception.ResourceNotFoundException;
 import com.uberclone.backend.repository.UserRepository;
