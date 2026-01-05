@@ -1,6 +1,5 @@
 package com.uberclone.backend.exception;
 
-
 import com.uberclone.backend.dto.ErrorResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleMethodNotSupportedException( MethodArgumentNotValidException ex) {
+    public ResponseEntity<?> handleMethodNotSupportedException(MethodArgumentNotValidException ex) {
         ErrorResponseDTO errorResponse = new ErrorResponseDTO();
         errorResponse.setMessage(ex.getMessage());
         LocalDateTime timestamp = LocalDateTime.now();
@@ -32,9 +31,22 @@ public class GlobalExceptionHandler {
         errorResponse.setDetail("Error Occurred");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleIllegalArgument(
             IllegalArgumentException ex) {
+
+        ErrorResponseDTO error = new ErrorResponseDTO();
+        error.setMessage(ex.getMessage());
+        error.setTimestamp(LocalDateTime.now());
+        error.setDetail("Bad request");
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<?> handleIllegalStateException(
+            IllegalStateException ex) {
 
         ErrorResponseDTO error = new ErrorResponseDTO();
         error.setMessage(ex.getMessage());
