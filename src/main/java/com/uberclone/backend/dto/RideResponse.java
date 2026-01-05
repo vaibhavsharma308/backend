@@ -16,4 +16,6 @@ public class RideResponse {
     private Long driverId;
     private String driverName;
     private String driverPhone;
+    private Double fare;
+
 }

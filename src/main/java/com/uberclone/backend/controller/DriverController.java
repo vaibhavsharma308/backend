@@ -53,21 +53,6 @@ public class DriverController {
 
         return ResponseEntity.ok(ride);
     }
-    @PostMapping("/me/rides/{rideId}/accept")
-    public RideResponse acceptRide(
-            @PathVariable Long rideId,
-            @RequestParam Long driverId) {
-
-        return rideService.acceptRide(rideId, driverId);
-    }
-    @PostMapping("/me/rides/{rideId}/reject")
-    public ResponseEntity<Void> rejectRide(
-            @PathVariable Long rideId,
-            @RequestParam Long driverId) {
-
-        rideService.rejectRide(rideId, driverId);
-        return ResponseEntity.noContent().build();
-    }
 
 
 }

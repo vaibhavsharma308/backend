@@ -47,7 +47,7 @@ public class DriverService {
                 .orElseThrow(() ->
                         new IllegalArgumentException("Invalid email or password"));
 
-        // Plain comparison for now (we’ll hash later)
+
         if (!driver.getPassword().equals(request.getPassword())) {
             throw new IllegalArgumentException("Invalid email or password");
         }
