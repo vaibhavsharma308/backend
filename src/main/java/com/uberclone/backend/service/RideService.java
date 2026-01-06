@@ -30,9 +30,6 @@ public class RideService {
         this.driverRepository = driverRepository;
     }
 
-    // =========================
-    // Rider creates a ride
-    // =========================
     @Transactional
     public RideResponse createRide(Long userId, CreateRideRequest request) {
 
@@ -64,10 +61,6 @@ public class RideService {
 
         return response;
     }
-
-    // =========================
-    // Driver polls for ride
-    // =========================
     public RideResponse getAssignedRideForDriver(Long driverId) {
 
         Optional<Ride> optionalRide =
@@ -91,10 +84,6 @@ public class RideService {
 
         return response;
     }
-
-    // =========================
-    // Driver accepts ride
-    // =========================
     @Transactional
     public RideResponse acceptRide(Long rideId, Long driverId) {
 
@@ -125,9 +114,6 @@ public class RideService {
         return response;
     }
 
-    // =========================
-    // Driver rejects ride
-    // =========================
     @Transactional
     public void rejectRide(Long rideId, Long driverId) {
 
@@ -149,10 +135,6 @@ public class RideService {
         rideRepository.save(ride);
         driverRepository.save(driver);
     }
-
-    // =========================
-    // Driver starts ride
-    // =========================
     @Transactional
     public RideResponse startRide(Long rideId, Long driverId) {
 
@@ -180,10 +162,6 @@ public class RideService {
 
         return response;
     }
-
-    // =========================
-    // Driver ends ride + fare
-    // =========================
     @Transactional
     public RideResponse endRide(Long rideId, Long driverId) {
 
@@ -232,10 +210,6 @@ public class RideService {
 
         return response;
     }
-
-    // =========================
-    // Rider checks ride
-    // =========================
     public RideResponse getRideById(Long rideId) {
 
         Ride ride = rideRepository.findById(rideId)
